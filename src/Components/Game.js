@@ -10,18 +10,22 @@ export default class Game extends React.Component {
         turn: "white",
     }
 
-    handleClick = (i) => {
-
+    handleClick = (position, j) => {
+        console.log('tile', position);
+        console.log('row', position % 8);
+        console.log('column', j);
     }
 
     render() {
         return (
             <div className="game-container">
                 <div className="game">
-                    <Board
-                    tiles={this.state.board}
-                    onClick={(i) => this.handleClick(i)}
-                    />
+                    <div className="game-board">
+                        <Board
+                        tiles={this.state.board}
+                        onClick={(i, j) => this.handleClick(i, j)}
+                        />
+                    </div>
                 </div>
             </div>
         )

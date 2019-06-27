@@ -6,23 +6,26 @@ function isEven(num) {
 }
 
 export default class Board extends React.Component {
-    renderTile(i, color) {
+    renderTile(i, j, color) {
+        // console.log('tile', i)
         return <Tile
+            key={i}
             piece={this.props.tiles[i]}
             style={this.props.tiles[i] ? this.props.tiles[i].style : null}
             color={color}
-            onClick={(() => this.props.onClick(i))}
+            onClick={(() => this.props.onClick(i, j))}
         />
     }
     render() {
         const board = [];
-        for (let i = 0; i < 8; i++) {
+        for (let row = 0; row < 8; row++) {
             const tileRow = [];
             for (let j = 0; j < 8; j++) {
-                const color = (isEven(i) && isEven(j)) || (!isEven(i) && !isEven(j))? "white" : "black";
-                tileRow.push(this.renderTile((i * 8) + j, color));
+                const color = (isEven(row) && isEven(j)) || (!isEven(row) && !isEven(j))? "white" : "black";
+                tileRow.push(this.renderTile((row * 8) + j, j, color));
             }
-            board.push(<div className="board-row">{tileRow}</div>)
+            // console.log('row', i)
+            board.push(<div className="board-row" key={row}>{tileRow}</div>)
         }
 
         return (
